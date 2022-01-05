@@ -1,0 +1,27 @@
+{
+    "name": "learn/laravel-install",
+    "description": "private package",
+    "keywords": ["laravel", "framework", "Learn"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jiang Tao",
+            "email": "3077740338@qq.com"
+        }
+    ],
+    "require": {
+        "php": "^7.3|^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Learn\\Install\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Learn\\Install\\Providers\\ServiceProvider"
+            ]
+        }
+    }
+}

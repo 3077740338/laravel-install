@@ -1,0 +1,11 @@
+@extends('layouts.base')
+@section('content')
+<div class="layui-main">
+  <div class="layui-inside layui-success"> <i class="layui-icon-btn layui-icon layui-icon-ok"></i>
+    <h2>恭喜您安装成功</h2>
+    <div class="layui-box">
+      <div class="layui-agree layui-ongoing-button"> @if(app('router')->has('admin')) <a href="{{ route('admin') }}" class="layui-btn layui-btn-normal" target="_blank">后台管理</a> @endif <a href="{{ app('router')->has('home') ? route('home') : url('/') }}" class="layui-btn" target="_blank">访问首页</a> </div>
+    </div>
+  </div>
+</div>
+@endsection 
