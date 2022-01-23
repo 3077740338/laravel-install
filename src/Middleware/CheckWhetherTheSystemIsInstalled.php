@@ -18,7 +18,7 @@ namespace Learn\Install\Middleware;
 use Closure;
 use Illuminate\Support\Str;
 use Illuminate\Contracts\Container\Container;
-use Illuminate\View\FileViewFinder;
+use Illuminate\Support\Facades\View;
 use Learn\Install\Support\Util;
 class CheckWhetherTheSystemIsInstalled
 {
@@ -54,9 +54,9 @@ class CheckWhetherTheSystemIsInstalled
         if ($this->isReading($request) || $this->runningUnitTests() || $this->inExceptArray($request) || Util::checkSystemIsInstalled()) {
             return optional($request, function ($request) use($next) {
                 if ($this->inExceptArray($request)) {
-                    $this->app->bind('view.finder', function ($app) {
-                        return new FileViewFinder($app['files'], [Util::withPath('resources/view')]);
-                    });
+                    View::replaceNamespace('install', collect(config('view.paths'))->map(function ($path) {
+                        return \sprintf('%s/install', $path);
+                    })->push(Util::withPath('resources/view'))->all());
                 }
                 return $next($request);
             });

@@ -26,7 +26,7 @@ class ShowHtml extends BaseController
     public function useProtocol()
     {
         $this->app['cache']->set('INSTALL_STEP', 'START');
-        return $this->fetch("step1");
+        return $this->fetch("install::step1");
     }
     /**
      * 环境检测
@@ -36,7 +36,7 @@ class ShowHtml extends BaseController
     public function environmentalDetection()
     {
         if ($this->app['cache']->pull('INSTALL_STEP') == 'START') {
-            return $this->fetch("step2");
+            return $this->fetch("install::step2");
         }
         return redirect()->route('install.step1');
     }
@@ -50,7 +50,7 @@ class ShowHtml extends BaseController
         if ($this->app['cache']->pull('INSTALL_STEP') == 'INSTALL') {
             return $this->filter('__currentHost__', function ($content) {
                 return \str_replace("{__currentHost__}", $this->request->root(), $content);
-            })->fetch("step3");
+            })->fetch("install::step3");
         }
         return redirect()->route('install.step1');
     }
@@ -63,7 +63,7 @@ class ShowHtml extends BaseController
     {
         if ($this->app['cache']->pull('INSTALL_STEP') == 'END') {
             Util::setupLockFile();
-            return $this->fetch("step5");
+            return $this->fetch("install::step5");
         }
         return redirect()->route('install.step1');
     }

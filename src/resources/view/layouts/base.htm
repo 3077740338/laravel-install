@@ -17,7 +17,7 @@
   <div class="layui-header-nav">
     <div class="layui-inside">
       <p class="layui-logo-name">{{$logo}}<span>{{$version}}</span></p>
-      @if('Laravel\Install\Controllers'==Request::route()->getAction('namespace') && 'install'==Request::route()->getAction('prefix'))
+      @if('Learn\Install\Controllers'==Request::route()->getAction('namespace') && 'install'==Request::route()->getAction('prefix'))
       <ul class="layui-schedule @if('useProtocol'==Request::route()->getActionMethod())layui-active @endif">
         <li class="layui-number">1</li>
         <li class="layui-word">{{$steps[1]}}</li>
